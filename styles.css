@@ -1,0 +1,66 @@
+body {
+  background-color: rgba(105, 54, 101, 0.591);
+
+}
+.Search {
+  color: white;
+  font-size: 2vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5vw;
+  gap: 40px;
+}
+
+.button{
+    color: rgb(0, 0, 0);
+  font-size: 2vw;
+  text-align: center;
+  background-color: rgb(255, 255, 255) ;
+  margin-top: 2.5vw;
+  gap: 40px;
+
+}
+.input {
+  background-color: rgb(248, 248, 248);
+  font-size: 1.5vw;
+}
+.block {
+color :rgb(0, 0, 0) ;
+text-align: center;
+
+
+font-size: 30px;
+
+  height: 350px;
+  width: 400px;
+  margin: 10px;
+  background-color: rgba(212, 252, 252, 0.522);
+  border: 3px solid rgb(0, 255, 234);
+}
+.heading {
+  font-size: 4vw;
+  text-align: center;
+
+
+
+
+  color: rgb(255, 255, 255);
+}
+.main_container{
+
+    display: flex ; 
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    gap:40px; 
+
+   
+}
+
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
