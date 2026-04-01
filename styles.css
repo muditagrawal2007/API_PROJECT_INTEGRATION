@@ -94,3 +94,77 @@ cursor: pointer;
 margin-bottom: 30px;
 
 }
+
+@media (max-width: 768px) {
+  .Search {
+    font-size: 3vw;
+    gap: 20px;
+  }
+  
+  .button , .button2 {
+    font-size: 3vw;
+    gap: 20px;
+  }
+  
+  .input {
+    font-size: 2.5vw;
+  }
+  
+  .block {
+    width: 90%;
+    height: auto;
+    font-size: 20px;
+  }
+  
+  .heading {
+    font-size: 5vw;
+  }
+  
+  .main_container {
+    gap: 20px;
+  }
+  
+  .close {
+    font-size: 2.5vw;
+    gap: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Search {
+    font-size: 4vw;
+    gap: 15px;
+    margin-top: 3vw;
+  }
+  
+  .button , .button2 {
+    font-size: 3.5vw;
+    gap: 15px;
+  }
+  
+  .input {
+    font-size: 3vw;
+  }
+  
+  .block {
+    width: 95%;
+    height: auto;
+    font-size: 16px;
+    margin: 10px auto;
+  }
+  
+  .heading {
+    font-size: 6vw;
+  }
+  
+  .main_container {
+    gap: 15px;
+  }
+  
+  .close {
+    font-size: 3vw;
+    gap: 10px;
+    margin-right: 10px;
+  }
+}
