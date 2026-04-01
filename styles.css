@@ -11,13 +11,17 @@ body {
   gap: 40px;
 }
 
-.button{
-    color: rgb(0, 0, 0);
+.button , .button2{
+  display: flex;
+  margin:auto; 
+  
+  color: rgb(0, 0, 0);
   font-size: 2vw;
   text-align: center;
   background-color: rgb(255, 255, 255) ;
   margin-top: 2.5vw;
   gap: 40px;
+cursor: pointer; 
 
 }
 .input {
@@ -49,6 +53,8 @@ font-size: 30px;
 .main_container{
 
     display: flex ; 
+    flex-grow : 1 ;
+
     flex-wrap: wrap;
     justify-content: space-evenly;
 
@@ -57,10 +63,34 @@ font-size: 30px;
    
 }
 
+/* 
 
-.pacifico-regular {
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
+ */
+
+
+
+
+.button2{ 
+  margin-bottom: 20px; 
+
 }
 
+.close{ 
+
+    display: flex;
+  margin:auto; 
+  
+  color: rgb(237, 52, 52);
+  font-size: 1.7vw;
+  text-align: center;
+  background-color: rgb(255, 255, 255) ;
+  margin-top: 2.5vw;
+  gap: 40px;
+cursor: pointer;
+  margin-right: 50px ;
+margin-bottom: 30px;
+
+}
