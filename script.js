@@ -66,11 +66,23 @@ let button2 = document.createElement("button");
 button2.className ="button2" ;
 button2.innerText = "Get all the data ";
 
+let buttonClear = document.createElement("button");
+buttonClear.className = "button";
+buttonClear.innerText = "Clear";
 
-
+let sortSelect = document.createElement("select");
+sortSelect.className = "sort-select";
+sortSelect.style.display = "none";
+sortSelect.innerHTML = `
+  <option value="">Select Sort Order</option>
+  <option value="asc">Sort A-Z (Ascending)</option>
+  <option value="desc">Sort Z-A (Descending)</option>
+`;
 
 main.appendChild(button);
-main.appendChild(button2)
+main.appendChild(button2);
+main.appendChild(buttonClear);
+main.appendChild(sortSelect);
 // main.appendChild(close2) ;
 
 let root = document.getElementById("root");
@@ -78,6 +90,167 @@ let root = document.getElementById("root");
 let main_container = document.createElement("div");
 main_container.className = "main_container";
 root.appendChild(main);
+root.appendChild(main_container);
+
+let close2 = null;
+
+button.addEventListener("click", async function () {
+  let nameValue = textBox1.value.toLowerCase();
+  let pnrValue = textBox2.value.toLowerCase();
+  let ageValue = textBox3.value.toLowerCase();
+  let trainValue = textBox5.value.toLowerCase();
+  let destinationValue = textBox4.value.toLowerCase();
+
+  fetch("https://api-7p3m.onrender.com/users")
+    .then(function (data) {
+      return data.json();
+    })
+    .then((file) => {
+      main_container.innerHTML = "";
+      
+      if (close2) {
+        main.removeChild(close2);
+        close2 = null;
+      }
+      
+      let filteredData = file.filter((element) => {
+        let nameMatch = nameValue === "" || element.name.toLowerCase().includes(nameValue);
+        let pnrMatch = pnrValue === "" || element.pnr_number.toLowerCase().includes(pnrValue);
+        let ageMatch = ageValue === "" || element.age.toString().includes(ageValue);
+        let trainMatch = trainValue === "" || element.train_name.toLowerCase().includes(trainValue);
+        let destinationMatch = destinationValue === "" || element.destination_station.toLowerCase().includes(destinationValue);
+
+        return nameMatch && pnrMatch && ageMatch && trainMatch && destinationMatch;
+      });
+
+      filteredData.forEach((element, i) => {
+        let container = document.createElement("div");
+        container.className = "block";
+
+        let inner1 = document.createElement("p");
+        inner1.innerText = element.pnr_number;
+
+        let inner2 = document.createElement("p");
+        inner2.innerText = element.name;
+
+        let inner3 = document.createElement("p");
+        inner3.innerText = element.destination_station;
+
+        let inner4 = document.createElement("p");
+        inner4.innerText = element.train_name;
+
+        let inner5 = document.createElement("p");
+        inner5.innerText = element.age;
+
+        container.append(inner1, inner2, inner3, inner4, inner5);
+        main_container.append(container);
+      });
+
+      sortSelect.style.display = "inline-block";
+
+      close2 = document.createElement("button");
+      close2.className = "close";
+      close2.innerText = "Close X";
+      main.appendChild(close2);
+
+      close2.addEventListener("click", function () {
+        main_container.innerHTML = "";
+        main.removeChild(close2);
+        close2 = null;
+        sortSelect.style.display = "none";
+      });
+    });
+});
+
+button2.addEventListener("click", async function () {
+  fetch("https://api-7p3m.onrender.com/users")
+    .then(function (data) {
+      return data.json();
+    })
+    .then((file) => {
+      main_container.innerHTML = "";
+      
+      if (close2) {
+        main.removeChild(close2);
+        close2 = null;
+      }
+      
+      file.forEach((element, i) => {
+        let container = document.createElement("div");
+        container.className = "block";
+
+        let inner1 = document.createElement("p");
+        inner1.innerText = element.pnr_number;
+
+        let inner2 = document.createElement("p");
+        inner2.innerText = element.name;
+
+        let inner3 = document.createElement("p");
+        inner3.innerText = element.destination_station;
+
+        let inner4 = document.createElement("p");
+        inner4.innerText = element.train_name;
+
+        let inner5 = document.createElement("p");
+        inner5.innerText = element.age;
+
+        container.append(inner1, inner2, inner3, inner4, inner5);
+        main_container.append(container);
+      });
+
+      sortSelect.style.display = "inline-block";
+
+      close2 = document.createElement("button");
+      close2.className = "close";
+      close2.innerText = "Close X";
+      main.appendChild(close2);
+
+      close2.addEventListener("click", function () {
+        main_container.innerHTML = "";
+        main.removeChild(close2);
+        close2 = null;
+        sortSelect.style.display = "none";
+      });
+    });
+});
+
+buttonClear.addEventListener("click", function () {
+  textBox1.value = "";
+  textBox2.value = "";
+  textBox3.value = "";
+  textBox5.value = "";
+  textBox4.value = "";
+});
+
+sortSelect.addEventListener("change", function () {
+  let sortOrder = sortSelect.value;
+  
+  if (sortOrder === "") {
+    return;
+  }
+  
+  let blocks = document.querySelectorAll(".block");
+  let blockArray = Array.from(blocks);
+  
+  blockArray.sort(function(a, b) {
+    let pElements_a = a.querySelectorAll("p");
+    let pElements_b = b.querySelectorAll("p");
+    
+    let nameA = pElements_a[1].innerText.toLowerCase();
+    let nameB = pElements_b[1].innerText.toLowerCase();
+    
+    if (sortOrder === "asc") {
+      return nameA.localeCompare(nameB);
+    } else if (sortOrder === "desc") {
+      return nameB.localeCompare(nameA);
+    }
+  });
+  
+  main_container.innerHTML = "";
+  blockArray.forEach(function(block) {
+    main_container.appendChild(block);
+  });
+});
 
 // let inner1 = document.createElement("div")
 // inner1.className = "inner1"
@@ -101,64 +274,66 @@ root.appendChild(main);
 // console.log(container.innerText)
 // root.appendChild(container);
 
-button2.addEventListener("click", async function () {
+// button2.addEventListener("click", async function () {
 
-  // try to understand this
-  fetch("https://api-7p3m.onrender.com/users")
-    .then(function (data) {
-      return data.json();
-    })
-    .then((file) => {
-      file.forEach((element, i) => {
-        let container = document.createElement("div");
+//   // try to understand this
+//   fetch("https://api-7p3m.onrender.com/users")
+//     .then(function (data) {
+//       return data.json();
+//     })
+//     .then((file) => {
+//       file.forEach((element, i) => {
+//         let container = document.createElement("div");
 
-        container.className = "block";
+//         container.className = "block";
 
-        let inner1 = document.createElement("p");
-        inner1.innerText = element.pnr_number;
+//         let inner1 = document.createElement("p");
+//         inner1.innerText = element.pnr_number;
 
-        let inner2 = document.createElement("p");
-        inner2.innerText = element.name;
+//         let inner2 = document.createElement("p");
+//         inner2.innerText = element.name;
 
-        let inner3 = document.createElement("p");
-        inner3.innerText = element.destination_station;
+//         let inner3 = document.createElement("p");
+//         inner3.innerText = element.destination_station;
 
-        let inner4 = document.createElement("p");
-        inner4.innerText = element.train_name;
+//         let inner4 = document.createElement("p");
+//         inner4.innerText = element.train_name;
 
-        let inner5 = document.createElement("p");
-        inner5.innerText = element.age;
+//         let inner5 = document.createElement("p");
+//         inner5.innerText = element.age;
 
-        container.append(inner1, inner2, inner3, inner4, inner5);
+//         container.append(inner1, inner2, inner3, inner4, inner5);
 
-        main_container.append(container);
-      });
-      console.log(main_container);
-      root.appendChild(main_container);
-    });
-    let close2  = document.createElement("button") ;
-close2.className = "close" ;
-close2.innerText = "Close X" ;
+//         main_container.append(container);
+//       });
+//       console.log(main_container);
+//       root.appendChild(main_container);
+//     });
+//     let close2  = document.createElement("button") ;
+// close2.className = "close" ;
+// close2.innerText = "Close X" ;
  
 
-main.appendChild(close2)
+// main.appendChild(close2)
 
 
 
-    close2.addEventListener("click" , function(){
+//     close2.addEventListener("click" , function(){
 
 
-      let k = document.getElementsByClassName("main_container");
+//       let k = document.getElementsByClassName("main_container");
 
-      main_container.innerHTML = "" ;
+//       main_container.innerHTML = "" ;
 
-      main.removeChild(close2)
-
-
+//       main.removeChild(close2)
 
 
 
-    })
+
+
+//     })
+
+    
 
   // let fetch_data = await fetch("https://api-7p3m.onrender.com/users");
   // let file = await fetch_data.json();
@@ -193,6 +368,6 @@ main.appendChild(close2)
   // });
   // console.log(main_container)
   // root.appendChild(main_container)
-});
+// });
 
 
