@@ -79,10 +79,14 @@ sortSelect.innerHTML = `
   <option value="desc">Sort Z-A (Descending)</option>
 `;
 
-main.appendChild(button);
-main.appendChild(button2);
-main.appendChild(buttonClear);
-main.appendChild(sortSelect);
+let buttonContainer = document.createElement("div");
+buttonContainer.className = "button-container";
+buttonContainer.appendChild(button);
+buttonContainer.appendChild(button2);
+buttonContainer.appendChild(buttonClear);
+buttonContainer.appendChild(sortSelect);
+
+main.appendChild(buttonContainer);
 // main.appendChild(close2) ;
 
 let root = document.getElementById("root");
@@ -128,19 +132,19 @@ button.addEventListener("click", async function () {
         container.className = "block";
 
         let inner1 = document.createElement("p");
-        inner1.innerText = element.pnr_number;
+        inner1.innerText = `PNR Number : ${element.pnr_number}`;
 
         let inner2 = document.createElement("p");
-        inner2.innerText = element.name;
+        inner2.innerText = `Name : ${element.name}`;
 
         let inner3 = document.createElement("p");
-        inner3.innerText = element.destination_station;
+        inner3.innerText = `Destination Station: ${element.destination_station}`;
 
         let inner4 = document.createElement("p");
-        inner4.innerText = element.train_name;
+        inner4.innerText = `Train name: ${element.train_name}`;
 
         let inner5 = document.createElement("p");
-        inner5.innerText = element.age;
+        inner5.innerText = `Age : ${element.age}`;
 
         container.append(inner1, inner2, inner3, inner4, inner5);
         main_container.append(container);
@@ -179,20 +183,20 @@ button2.addEventListener("click", async function () {
         let container = document.createElement("div");
         container.className = "block";
 
-        let inner1 = document.createElement("p");
-        inner1.innerText = element.pnr_number;
+           let inner1 = document.createElement("p");
+        inner1.innerText = `PNR Number : ${element.pnr_number}`;
 
         let inner2 = document.createElement("p");
-        inner2.innerText = element.name;
+        inner2.innerText = `Name : ${element.name}`;
 
         let inner3 = document.createElement("p");
-        inner3.innerText = element.destination_station;
+        inner3.innerText = `Destination Station: ${element.destination_station}`;
 
         let inner4 = document.createElement("p");
-        inner4.innerText = element.train_name;
+        inner4.innerText = `Train name: ${element.train_name}`;
 
         let inner5 = document.createElement("p");
-        inner5.innerText = element.age;
+        inner5.innerText = `Age : ${element.age}`;
 
         container.append(inner1, inner2, inner3, inner4, inner5);
         main_container.append(container);
