@@ -6,6 +6,10 @@ git clone https://github.com/muditagrawal2007/API_PROJECT_INTEGRATION.git
 
 2) in the terminal run the command :: npm run dev 
 
+
+Another way to use ::
+Open the deployed project link directly ::  api-project-integration.vercel.app
+
 Features used are :
 HTML , CSS , JS (fetching data from the UI)
 
